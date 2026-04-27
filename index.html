@@ -15,77 +15,81 @@
         .lopta-lice { position: absolute; width: 100%; height: 100%; border-radius: 50%; background: url('j.jpg') center/cover; border: 3px solid silver; box-shadow: 0 0 25px white; }
         #sat-prikaz { color: white; font-size: 1.2em; font-weight: bold; text-shadow: 2px 2px 5px #000; margin-top: 30px; letter-spacing: 1px; }
 
-        /* ZASTAVE - SADA SE UGIBUJU */
+        /* ZASTAVE SA EFEKTOM UGIBANJA */
         .blok-desno { position: fixed; top: 30px; right: 30px; display: flex; flex-direction: column; align-items: center; z-index: 20; }
         .zastave { display: flex; gap: 15px; margin-bottom: 10px; }
-        .zastava-link { width: 55px; height: 33px; border: 2px solid white; border-radius: 4px; display: flex; flex-direction: column; overflow: hidden; box-shadow: 2px 2px 10px #000; transition: 0.2s ease; cursor: pointer; }
-        .zastava-link:hover { transform: scale(1.15); }
+        .zastava-link { 
+            width: 55px; height: 33px; border: 2px solid white; border-radius: 4px; 
+            display: flex; flex-direction: column; overflow: hidden; 
+            box-shadow: 2px 2px 10px #000; transition: 0.3s ease-in-out; cursor: pointer; 
+        }
+        /* Efekt ugibanja kao kod donjih linkova */
+        .zastava-link:hover { transform: scale(1.2) translateY(-5px); filter: brightness(1.2); }
+        
         .srb .b1 { background: #C6363C; height: 33.3%; } .srb .b2 { background: #0C4076; height: 33.3%; } .srb .b3 { background: #FFFFFF; height: 33.3%; }
         .rus .b1 { background: #FFFFFF; height: 33.3%; } .rus .b2 { background: #0033A0; height: 33.3%; } .rus .b3 { background: #DA291C; height: 33.3%; }
         .grk { background: #005BAE; position: relative; } .grk::after { content: "✚"; color: white; display: flex; justify-content: center; align-items: center; height: 100%; font-size: 20px; }
         #datum-prikaz { color: white; font-size: 1.2em; font-weight: bold; text-shadow: 2px 2px 5px #000; }
 
         /* PERGAMENT */
-        .sadrzaj { position: relative; z-index: 5; text-align: center; margin-top: 80px; padding-bottom: 220px; }
+        .sadrzaj { position: relative; z-index: 5; text-align: center; margin-top: 80px; }
         h1 { font-size: 3.5em; color: #ccff00; text-shadow: 3px 3px 15px #000; margin: 0; }
         h2 { color: #ccff00; font-style: italic; margin: 0 0 30px 0; text-shadow: 2px 2px 10px #000; }
         .hartija { 
             display: inline-block; background: #d4b483; padding: 50px 70px; position: relative; 
             background-image: url('https://transparenttextures.com'); 
             box-shadow: inset 0 0 80px #8b5a2b; border: 1px solid rgba(0,0,0,0.1); 
-            animation: bojaHartije 10s infinite alternate ease-in-out;
-            max-width: 80%; min-height: 50px; height: auto;
+            max-width: 80%; min-height: 100px; height: auto;
             clip-path: polygon(2% 5%, 15% 1%, 38% 6%, 62% 2%, 82% 7%, 95% 2%, 100% 18%, 97% 42%, 100% 62%, 98% 82%, 100% 97%, 85% 100%, 65% 97%, 42% 100%, 25% 98%, 4% 100%, 1% 85%, 5% 65%, 2% 45%, 6% 25%, 0% 8%);
         }
-        @keyframes bojaHartije { 0% { background-color: #d4b483; } 100% { background-color: #c4a474; } }
-        #tekst-misli { color: #8b0000; font-size: 2.1em; font-weight: bold; line-height: 1.4; text-shadow: 1px 1px 0px rgba(255,255,255,0.1); }
+        #tekst-misli { color: #8b0000; font-size: 2.1em; font-weight: bold; line-height: 1.4; }
+
+        /* KNJIGA KOJA LEPRŠA */
+        .knjiga-vetar { margin: 30px auto; width: 220px; height: 160px; position: relative; z-index: 5; perspective: 1200px; }
+        .knjiga-vetar img { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; border: 1px solid #8b5a2b; border-radius: 2px; opacity: 0; transform-origin: left center; transition: 0.6s ease; }
+        .knjiga-vetar img.aktivna { opacity: 1; transform: rotateY(-5deg); }
+        .knjiga-vetar img.odlece { opacity: 0; transform: rotateY(-120deg); }
 
         /* DONJA ZONA */
         .donja-zona { position: fixed; bottom: 30px; left: 0; width: 100%; display: flex; justify-content: space-between; align-items: flex-end; padding: 0 50px; box-sizing: border-box; z-index: 100; }
-        .ikona-kontejner { position: relative; display: flex; flex-direction: column; align-items: center; }
-
-        /* CRNI PROZOR - SREĐEN */
+        .ikona-kontejner { position: relative; display: flex; flex-direction: column; align-items: center; cursor: pointer; }
+        
         .prozor { 
-            visibility: hidden; position: absolute; 
-            bottom: 75%; left: 50%; transform: translateX(-50%);
-            background: #000; border: 1px solid silver; border-radius: 5px; 
-            padding: 4px 10px; text-align: center; color: #ccff00; font-weight: bold; 
-            font-size: 0.8em; white-space: nowrap; opacity: 0; transition: 0.2s ease; z-index: 200;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.9);
-            margin-bottom: -8px; 
-            pointer-events: none;
+            visibility: hidden; position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); 
+            background: #000; border: 1px solid silver; border-radius: 5px; padding: 5px 12px; 
+            color: #ccff00; font-weight: bold; font-size: 0.8em; white-space: nowrap; 
+            opacity: 0; transition: 0.2s ease; z-index: 200; margin-bottom: 2px; pointer-events: none;
         }
-        .prozor::after {
-            content: ""; position: absolute; top: 100%; left: 50%; margin-left: -5px;
-            border-width: 5px; border-style: solid; border-color: #000 transparent transparent transparent;
+        .prozor::after { content: ""; position: absolute; top: 100%; left: 50%; margin-left: -5px; border-width: 5px; border-style: solid; border-color: #000 transparent transparent transparent; }
+        .ikona-kontejner:hover .prozor { visibility: visible; opacity: 1; }
+
+        .ikona-baza { 
+            width: 55px; height: 55px; border-radius: 12px; display: flex; align-items: center; justify-content: center; 
+            font-size: 30px; color: white; transition: 0.3s; box-shadow: 2px 4px 10px black; border: 1px solid rgba(255,255,255,0.3);
         }
-        .ikona-kontejner:hover .prozor { visibility: visible; opacity: 1; bottom: 95%; }
-
-        .ikona { font-size: 3em; cursor: pointer; text-shadow: 2px 2px 5px #000; transition: 0.2s; -webkit-tap-highlight-color: transparent; }
-        .ikona:hover { transform: scale(1.1); }
-
-        .mail { color: silver; } .viber { color: #7360f2; }
-        .yt { color: #FF0000; } .yt2 { color: #8B0000; }
-        .insta { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285AEB 90%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .fb { color: #1877F2; }
+        .ikona-baza:hover { transform: scale(1.2) translateY(-5px); filter: brightness(1.2); }
+        
+        .mail { background: #555; font-size: 32px; }
+        .viber { background: #7360f2; }
+        .yt { background: #FF0000; }
+        .yt2 { background: #8B0000; }
+        .insta { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285AEB 90%); font-size: 34px; font-weight: bold; }
+        .fb { background: #1877F2; font-family: sans-serif; font-weight: bold; font-size: 35px; }
 
         @keyframes rotacija { from { transform: rotateY(0deg); } to { transform: rotateY(360deg); } }
     </style>
 </head>
 <body>
     <div class="mrak"></div>
-
     <div class="blok-levo">
         <div class="scena"><div class="lopta"><div class="lopta-lice"></div></div></div>
         <div id="sat-prikaz"></div>
     </div>
-
-    <!-- Zastave: Ugiбају se, nemaju linkove u HTML-u (idu preko JS-a) -->
     <div class="blok-desno">
         <div class="zastave">
-            <div onclick="otvori('https://crkvenikalendar.com/')" class="zastava-link srb"><div class="b1"></div><div class="b2"></div><div class="b3"></div></div>
-            <div onclick="otvori('https://saint.gr/')" class="zastava-link grk"></div>
-            <div onclick="otvori('https://days.pravoslavie.ru/')" class="zastava-link rus"><div class="b1"></div><div class="b2"></div><div class="b3"></div></div>
+            <div onclick="idi(1)" class="zastava-link srb"><div class="b1"></div><div class="b2"></div><div class="b3"></div></div>
+            <div onclick="idi(2)" class="zastava-link grk"></div>
+            <div onclick="idi(3)" class="zastava-link rus"><div class="b1"></div><div class="b2"></div><div class="b3"></div></div>
         </div>
         <div id="datum-prikaz"></div>
     </div>
@@ -94,81 +98,101 @@
         <h1>М. Токовић</h1>
         <h2>Ходочашће на Исток</h2>
         <div class="hartija"><div id="tekst-misli"></div></div>
+        <div class="knjiga-vetar">
+            <img src="1.JPG" class="aktivna"><img src="2.JPG"><img src="3.JPG">
+        </div>
     </div>
 
     <div class="donja-zona">
-        <div style="display: flex; gap: 35px;">
-            <div class="ikona-kontejner">
+        <div style="display: flex; gap: 30px;">
+            <div class="ikona-kontejner" onclick="idi(4)">
                 <div class="prozor">topaz032@gmail.com</div>
-                <div onclick="otvori('mailto:topaz032@gmail.com')" class="ikona mail">@</div>
+                <div class="ikona-baza mail">✉</div>
             </div>
-            <div class="ikona-kontejner">
+            <div class="ikona-kontejner" onclick="idi(5)">
                 <div class="prozor">Viber</div>
-                <div onclick="otvori('viber://chat?number=%2B381645330444')" class="ikona viber">📞</div>
+                <div class="ikona-baza viber">📞</div>
             </div>
         </div>
-
-        <div style="display: flex; flex-direction: column; gap: 10px; margin-right: 40px; align-items: center;">
-            <div class="ikona-kontejner">
+        <!-- VEĆI RAZMAK IZMEĐU YOUTUBE LINKOVA -->
+        <div style="display: flex; flex-direction: column; gap: 35px; align-items: center; margin-right: 40px;">
+            <div class="ikona-kontejner" onclick="idi(6)">
                 <div class="prozor">YouTube 1</div>
-                <div onclick="otvori('https://www.youtube.com/@%D0%9C.%D0%A2%D0%BE%D0%BA%D0%BE%D0%B2%D0%B8%D1%9B')" class="ikona yt">▶</div>
+                <div class="ikona-baza yt">▶</div>
             </div>
-            <div class="ikona-kontejner">
+            <div class="ikona-kontejner" onclick="idi(7)">
                 <div class="prozor">YouTube 2</div>
-                <div onclick="otvori('https://www.youtube.com/@marko32t/videos')" class="ikona yt yt2">▶</div>
+                <div class="ikona-baza yt2">▶</div>
             </div>
         </div>
-
-        <div style="display: flex; gap: 45px;">
-            <div class="ikona-kontejner">
+        <div style="display: flex; gap: 30px;">
+            <div class="ikona-kontejner" onclick="idi(8)">
                 <div class="prozor">Instagram</div>
-                <div onclick="otvori('https://www.instagram.com/markotokovic/')" class="ikona insta">回</div>
+                <div class="ikona-baza insta">回</div>
             </div>
-            <div class="ikona-kontejner">
+            <div class="ikona-kontejner" onclick="idi(9)">
                 <div class="prozor">Facebook</div>
-                <div onclick="otvori('https://www.facebook.com/markotokovic')" class="ikona fb">f</div>
+                <div class="ikona-baza fb">f</div>
             </div>
         </div>
     </div>
 
     <script>
-        // Funkcija koja otvara linkove - sprečava browser da pravi "bele prozore"
-        function otvori(url) {
-            window.open(url, '_blank');
+        function idi(n) {
+            const l = ["","https://crkvenikalendar.com/","https://saint.gr/","https://days.pravoslavie.ru/","mailto:topaz032@gmail.com","viber://chat?number=%2B381645330444","https://www.youtube.com/@%D0%9C.%D0%A2%D0%BE%D0%BA%D0%BE%D0%B2%D0%B8%D1%9B","https://www.youtube.com/@marko32t/videos","https://www.instagram.com/markotokovic/","https://www.facebook.com/markotokovic"];
+            window.open(l[n], '_blank');
         }
 
+        let idx = 0; const slike = document.querySelectorAll('.knjiga-vetar img');
+        function listaj() {
+            if(!slike.length) return;
+            slike[idx].classList.remove('aktivna'); slike[idx].classList.add('odlece');
+            let p = idx; idx = (idx + 1) % slike.length;
+            setTimeout(() => { slike[idx].classList.remove('odlece'); slike[idx].classList.add('aktivna'); }, 50);
+            setTimeout(() => { slike[p].classList.remove('odlece'); }, 600);
+        }
+        setInterval(listaj, 1400);
+
         const misliZaMaj = {
+            "1.5.": "Бог не тражи од нас много, само да Му верујемо...",
             "3.5.": "Кљун се заглавио у решетку канализационог одвода.<br>Уместо да смирено затвори кљун и извуче се,<br>он је све више гордо зевао и усисавао канализацију у себе.",
             "6.5.": "Чудио се зашто стално жури, као мећава —<br>док није схватио да га је ђаво узјахао па копитама удара о слабине,<br>а роговима га туче за врат.",
             "8.5.": "Није исто Q10 i IQ10.",
             "10.5.": "Гледају унакрсно, а нису разроки,<br>да би што више „похватали“.",
-            "12.5.": "Један њаче, други гаче, трећи њишти, четврти пишти,<br>пети скаче… - јасно вам је да није реч о животињама.",
-            "17.5.": "Знам човека који је имао захват на мозгу,<br>знам i другога који је имао интервенцију на задњици.<br>– Свакоме страда оно што највише користи.",
+            "12.5.": "Један њаче, други гаче, трећи њишти, четврти пишти,<br>пети скаче…",
+            "17.5.": "Знам човека који је имао захват на мозгу, знам i другога који је имао интервенцију на задњици. – Свакоме страда оно што највише користи.",
             "19.5.": "Капетана Куку нису пробадали кукови.",
-            "21.5.": "Он је неутралан, чак је неопредељен<br>и по питању самог себе.",
-            "22.5.": "Да ниси отишла у бели свет,<br>не би схватила колико је живот у Србији леп.",
-            "24.5.": "На свако питање има одговор, али филозофски,<br>мада на нека и философски.",
-            "30.5.": "Имам гробно место, на прелепом месту, испод тује...<br>Нит нешто стичем, нит сам спреман за онамо...<br>Покој нам душама, ускоро, Боже здравља!",
-            "31.5.": '<span onclick="otvori(\'https://youtu.be\')" style="color:#8b0000; cursor:pointer;">Тројице</span>'
+            "21.5.": "Он је неутралан, чак је неопредељен i по питању самог себе.",
+            "22.5.": "Да ниси отишла у бели свет, не би схватила колико је живот у Србији леп.",
+            "24.5.": "На свако питање има одговор, али филозофски, мада на нека и философски.",
+            "30.5.": "Имам гробно место, на прелепом месту, испод тује... Нит нешто стичем, нит сам спреман за онамо... Покој нам душама, ускоро, Боже здравља!",
+            "31.5.": '<span onclick="idi(6)" style="color:#8b0000; cursor:pointer;">Тројице</span>'
         };
 
         function azurirajVreme() { document.getElementById('sat-prikaz').innerText = new Date().toLocaleTimeString('sr-RS'); }
         setInterval(azurirajVreme, 1000);
 
         function kucajTekst(e, t) {
-            let i = 0; e.innerHTML = "";
+            let j = 0; e.innerHTML = "";
             let interval = setInterval(() => {
-                if (t[i] === "<") { let tagKraj = t.indexOf(">", i); e.innerHTML += t.substring(i, tagKraj + 1); i = tagKraj + 1; }
-                else { e.innerHTML += t[i]; i++; }
-                if (i >= t.length) clearInterval(interval);
-            }, 85);
+                if (t[j] === "<") { 
+                    let tagKraj = t.indexOf(">", j); 
+                    e.innerHTML += t.substring(j, tagKraj + 1); 
+                    j = tagKraj + 1; 
+                } else { 
+                    e.innerHTML += t[j]; 
+                    j++; 
+                }
+                if (j >= t.length) clearInterval(interval);
+            }, 75);
         }
 
         function postaviSve() {
             const d = new Date(); 
             document.getElementById('datum-prikaz').innerText = d.toLocaleDateString('sr-RS') + ".";
             const kljuc = d.getDate() + "." + (d.getMonth() + 1) + ".";
-            kucajTekst(document.getElementById('tekst-misli'), misliZaMaj[kljuc] || "Бог постоји за оне који верују,<br>а не постоји за оне који не верују...");
+            const tekst = misliZaMaj[kljuc] || "Бог постоји за оне који верују,<br>а не постоји за оне који не верују...";
+            kucajTekst(document.getElementById('tekst-misli'), tekst);
             azurirajVreme();
         }
         postaviSve();
