@@ -19,26 +19,23 @@
         .zvezda { position: absolute; background: white; border-radius: 50%; box-shadow: 0 0 10px 2px white; opacity: 0; animation: treperenje 2.5s infinite ease-in-out; }
         @keyframes treperenje { 0%, 100% { opacity: 0; transform: scale(0.3); } 50% { opacity: 1; transform: scale(1.2); } }
 
-        /* LEVI BLOK - LOPTA I DODATNO ODMAKNUT SAT */
+        /* LOPTA I SAT */
         .blok-levo { position: fixed; top: 30px; left: 30px; display: flex; flex-direction: column; align-items: center; z-index: 10; }
         .scena { width: 125px; height: 125px; perspective: 1000px; }
         .lopta { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; animation: rotacija 12s linear infinite; }
         .lopta-lice { position: absolute; width: 100%; height: 100%; border-radius: 50%; background: url('j.jpg') center/cover; border: 3px solid silver; box-shadow: 0 0 25px white; }
-        
-        /* SAT - DODATNO POMEREN NANIŽE */
         #sat-prikaz { color: white; font-size: 1.2em; font-weight: bold; text-shadow: 2px 2px 5px #000; margin-top: 30px; letter-spacing: 1px; }
 
         /* DESNI BLOK - ZASTAVE I DATUM */
         .blok-desno { position: fixed; top: 30px; right: 30px; display: flex; flex-direction: column; align-items: center; z-index: 20; }
         .zastave { display: flex; gap: 15px; margin-bottom: 10px; }
         .zastava-link { width: 55px; height: 33px; border: 2px solid white; border-radius: 4px; cursor: pointer; transition: 0.3s; display: flex; flex-direction: column; overflow: hidden; box-shadow: 2px 2px 10px #000; text-decoration: none; }
-        .zastava-link:hover { transform: scale(1.1); border-color: gold; }
         .srb .b1 { background: #C6363C; height: 33.3%; } .srb .b2 { background: #0C4076; height: 33.3%; } .srb .b3 { background: #FFFFFF; height: 33.3%; }
         .rus .b1 { background: #FFFFFF; height: 33.3%; } .rus .b2 { background: #0033A0; height: 33.3%; } .rus .b3 { background: #DA291C; height: 33.3%; }
         .grk { background: #005BAE; position: relative; } .grk::after { content: "✚"; color: white; display: flex; justify-content: center; align-items: center; height: 100%; font-size: 20px; font-weight: bold; }
         #datum-prikaz { color: white; font-size: 1.2em; font-weight: bold; text-shadow: 2px 2px 5px #000; margin-top: 5px; }
 
-        /* SREDINA - PERGAMENT */
+        /* PERGAMENT */
         .sadrzaj { position: relative; z-index: 5; text-align: center; margin-top: 100px; }
         h1 { font-size: 3.5em; text-shadow: 3px 3px 15px #000; margin: 0; color: #ccff00; }
         h2 { color: #ccff00; font-style: italic; margin: 0 0 40px 0; font-size: 1.8em; text-shadow: 2px 2px 10px #000; }
@@ -54,16 +51,24 @@
         @keyframes bojaHartije { 0% { background-color: #d4b483; } 50% { background-color: #e6c58d; } 100% { background-color: #c4a474; } }
         #tekst-misli { color: #8b0000; font-size: 2.3em; font-weight: bold; line-height: 1.4; text-shadow: 1px 1px 0px rgba(255,255,255,0.1); min-height: 1.4em; }
 
-        /* PROZORI */
-        .info-prozor { display: none; position: fixed; background: rgba(0, 0, 0, 0.95); border: 2px solid silver; border-radius: 15px; padding: 20px; text-align: center; z-index: 100; backdrop-filter: blur(10px); box-shadow: 0 0 30px black; color: white; min-width: 180px; }
+        /* MEJL PROZOR */
+        .info-prozor { display: none; position: fixed; background: rgba(0, 0, 0, 0.95); border: 2px solid silver; border-radius: 15px; padding: 20px; text-align: center; z-index: 100; backdrop-filter: blur(10px); box-shadow: 0 0 30px black; color: white; min-width: 180px; bottom: 30px; left: 20px; }
         .info-prozor button { background: #8b0000; color: white; border: none; padding: 5px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: 15px; }
         .info-prozor a { color: white; text-decoration: none; font-weight: bold; font-size: 1.2em; display: block; }
-        #mejl-prozor { bottom: 30px; left: 20px; }
-        #mreze-prozor { bottom: 30px; right: 20px; }
+
+        /* NOVE POZICIJE IKONA DOLE */
         .et { position: fixed; bottom: 30px; left: 30px; font-size: 3.5em; color: silver; cursor: pointer; z-index: 10; text-shadow: 2px 2px 5px #000; }
-        .donja-desna-zona { position: fixed; bottom: 30px; right: 30px; display: flex; gap: 40px; z-index: 10; }
-        .mreza-ikona { font-size: 2.8em; cursor: pointer; text-shadow: 2px 2px 5px #000; }
-        .fb-boja { color: #1877F2; } .yt-boja { color: #FF0000; }
+        
+        /* Facebook skroz desno */
+        .fb-fiksni { position: fixed; bottom: 30px; right: 30px; font-size: 2.8em; color: #1877F2; text-shadow: 2px 2px 5px #000; text-decoration: none; z-index: 10; transition: 0.3s; }
+        
+        /* YouTube naslagani, malo pomereni ulevo */
+        .yt-blok { position: fixed; bottom: 30px; right: 100px; display: flex; flex-direction: column; gap: 5px; align-items: center; z-index: 10; }
+        .mreza-ikona { font-size: 2.5em; cursor: pointer; text-shadow: 2px 2px 5px #000; text-decoration: none; transition: 0.3s; }
+        .yt-boja { color: #FF0000; }
+        .yt2-boja { color: #FF0000; opacity: 0.5; }
+        .mreza-ikona:hover, .fb-fiksni:hover { transform: scale(1.2); opacity: 1; }
+
         @keyframes rotacija { from { transform: rotateY(0deg); } to { transform: rotateY(360deg); } }
     </style>
 </head>
@@ -96,17 +101,15 @@
         <button onclick="zatvoriMejl()">Затвори</button>
     </div>
 
-    <div id="mreze-prozor" class="info-prozor">
-        <div id="fb-link" style="display:none;"><a href="https://www.facebook.com/markotokovic" target="_blank">Facebook</a></div>
-        <div id="yt-link" style="display:none;"><a href="https://www.youtube.com/@%D0%9C.%D0%A2%D0%BE%D0%BA%D0%BE%D0%B2%D0%B8%D1%9B" target="_blank">YouTube</a></div>
-        <button onclick="zatvoriMreze()">Затвори</button>
+    <!-- DONJE IKONE -->
+    <div class="et" id="majmunce" onclick="prikaziMejl()">@</div>
+    
+    <div class="yt-blok">
+        <a href="https://www.youtube.com/@%D0%9C.%D0%A2%D0%BE%D0%BA%D0%BE%D0%B2%D0%B8%D1%9B" target="_blank" class="mreza-ikona yt-boja">▶</a>
+        <a href="https://www.youtube.com/@marko32t/videos" target="_blank" class="mreza-ikona yt2-boja">▶</a>
     </div>
 
-    <div class="et" id="majmunce" onclick="prikaziMejl()">@</div>
-    <div class="donja-desna-zona" id="ikonice">
-        <div class="mreza-ikona fb-boja" onclick="prikaziMreze('fb')">f</div>
-        <div class="mreza-ikona yt-boja" onclick="prikaziMreze('yt')">▶</div>
-    </div>
+    <a href="https://www.facebook.com/markotokovic" target="_blank" class="fb-fiksni">f</a>
 
     <script>
         const misliZaMaj = {
@@ -121,7 +124,7 @@
             "22.5.": "Да ниси отишла у бели свет,<br>не би схватила колико је живот у Србији леп.",
             "24.5.": "На свако питање има одговор, али филозофски,<br>мада на нека и философски.",
             "30.5.": "Имам гробно место, на прелепом месту, испод тује...<br>Нит нешто стичем, нит сам спреман за онамо...<br>Покој нам душама, ускоро, Боже здравља!",
-            "31.5.": '<a href="https://youtu.be" target="_blank">Тројице</a>'
+            "31.5.": '<a href="https://youtu.be" target="_blank" style="color:#8b0000;">Тројице</a>'
         };
 
         function azurirajVreme() {
@@ -150,8 +153,6 @@
 
         function prikaziMejl() { document.getElementById('mejl-prozor').style.display='block'; document.getElementById('majmunce').style.visibility='hidden'; }
         function zatvoriMejl() { document.getElementById('mejl-prozor').style.display='none'; document.getElementById('majmunce').style.visibility='visible'; }
-        function prikaziMreze(tip) { document.getElementById('mreze-prozor').style.display='block'; document.getElementById('ikonice').style.visibility='hidden'; document.getElementById('fb-link').style.display=(tip==='fb'?'block':'none'); document.getElementById('yt-link').style.display=(tip==='yt'?'block':'none'); }
-        function zatvoriMreze() { document.getElementById('mreze-prozor').style.display='none'; document.getElementById('ikonice').style.visibility='visible'; }
         
         const k = document.getElementById('zvezde');
         for(let i=0; i<25; i++) {
