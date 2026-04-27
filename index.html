@@ -19,7 +19,7 @@
         .zvezda { position: absolute; background: white; border-radius: 50%; box-shadow: 0 0 10px 2px white; opacity: 0; animation: treperenje 2.5s infinite ease-in-out; }
         @keyframes treperenje { 0%, 100% { opacity: 0; transform: scale(0.3); } 50% { opacity: 1; transform: scale(1.2); } }
 
-        /* LOPTA I SAT */
+        /* LEVI BLOK - LOPTA I SAT */
         .blok-levo { position: fixed; top: 30px; left: 30px; display: flex; flex-direction: column; align-items: center; z-index: 10; }
         .scena { width: 125px; height: 125px; perspective: 1000px; }
         .lopta { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; animation: rotacija 12s linear infinite; }
@@ -49,25 +49,31 @@
             animation: bojaHartije 10s infinite alternate ease-in-out;
         }
         @keyframes bojaHartije { 0% { background-color: #d4b483; } 50% { background-color: #e6c58d; } 100% { background-color: #c4a474; } }
-        #tekst-misli { color: #8b0000; font-size: 2.3em; font-weight: bold; line-height: 1.4; text-shadow: 1px 1px 0px rgba(255,255,255,0.1); min-height: 1.4em; }
+        #tekst-misli { color: #8b0000; font-size: 2.3em; font-weight: bold; line-height: 1.4; text-shadow: 1px 1px 0px rgba(255,255,255,0.1); }
 
-        /* MEJL PROZOR */
-        .info-prozor { display: none; position: fixed; background: rgba(0, 0, 0, 0.95); border: 2px solid silver; border-radius: 15px; padding: 20px; text-align: center; z-index: 100; backdrop-filter: blur(10px); box-shadow: 0 0 30px black; color: white; min-width: 180px; bottom: 30px; left: 20px; }
+        /* DONJA ZONA ZA IKONE */
+        .donja-zona { position: fixed; bottom: 30px; left: 0; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 0 40px; box-sizing: border-box; z-index: 10; }
+        
+        /* Harmonizovan efekat umanjenja za sve ikone bez scale bagova */
+        .ikona-baza { transition: 0.2s ease-in-out; cursor: pointer; text-shadow: 2px 2px 5px #000; display: inline-block; text-decoration: none; font-weight: bold; }
+        .ikona-baza:hover { transform: scale(0.92); opacity: 0.8; }
+
+        /* Pošta - Direktna veličina fonta umesto scale */
+        .et-fiksni { font-size: 4.5em; color: silver; }
+
+        /* YouTube - Trunka razmaka */
+        .yt-blok { display: flex; flex-direction: column; gap: 14px; align-items: center; margin-right: 40px; }
+        .mreza-ikona { font-size: 3em; line-height: 0.8; }
+        .yt1 { color: #FF0000; }
+        .yt2 { color: #8B0000; }
+
+        /* Facebook - Direktna veličina fonta umesto scale */
+        .fb-fiksni { font-size: 4.5em; color: #1877F2; }
+
+        /* PROZOR ZA MEJL */
+        .info-prozor { display: none; position: fixed; background: rgba(0, 0, 0, 0.95); border: 2px solid silver; border-radius: 15px; padding: 20px; text-align: center; z-index: 100; backdrop-filter: blur(10px); box-shadow: 0 0 30px black; color: white; min-width: 180px; bottom: 100px; left: 40px; }
         .info-prozor button { background: #8b0000; color: white; border: none; padding: 5px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: 15px; }
         .info-prozor a { color: white; text-decoration: none; font-weight: bold; font-size: 1.2em; display: block; }
-
-        /* NOVE POZICIJE IKONA DOLE */
-        .et { position: fixed; bottom: 30px; left: 30px; font-size: 3.5em; color: silver; cursor: pointer; z-index: 10; text-shadow: 2px 2px 5px #000; }
-        
-        /* Facebook skroz desno */
-        .fb-fiksni { position: fixed; bottom: 30px; right: 30px; font-size: 2.8em; color: #1877F2; text-shadow: 2px 2px 5px #000; text-decoration: none; z-index: 10; transition: 0.3s; }
-        
-        /* YouTube naslagani, malo pomereni ulevo */
-        .yt-blok { position: fixed; bottom: 30px; right: 100px; display: flex; flex-direction: column; gap: 5px; align-items: center; z-index: 10; }
-        .mreza-ikona { font-size: 2.5em; cursor: pointer; text-shadow: 2px 2px 5px #000; text-decoration: none; transition: 0.3s; }
-        .yt-boja { color: #FF0000; }
-        .yt2-boja { color: #FF0000; opacity: 0.5; }
-        .mreza-ikona:hover, .fb-fiksni:hover { transform: scale(1.2); opacity: 1; }
 
         @keyframes rotacija { from { transform: rotateY(0deg); } to { transform: rotateY(360deg); } }
     </style>
@@ -75,12 +81,10 @@
 <body>
     <div class="mrak"></div>
     <div class="zvezde-oreol" id="zvezde"></div>
-    
     <div class="blok-levo">
         <div class="scena"><div class="lopta"><div class="lopta-lice"></div></div></div>
         <div id="sat-prikaz">00:00:00</div>
     </div>
-
     <div class="blok-desno">
         <div class="zastave">
             <a href="https://crkvenikalendar.com/" target="_blank" class="zastava-link srb"><div class="b1"></div><div class="b2"></div><div class="b3"></div></a>
@@ -89,7 +93,6 @@
         </div>
         <div id="datum-prikaz"></div>
     </div>
-
     <div class="sadrzaj">
         <h1>М. Токовић</h1>
         <h2>Ходочашће на Исток</h2>
@@ -101,21 +104,22 @@
         <button onclick="zatvoriMejl()">Затвори</button>
     </div>
 
-    <!-- DONJE IKONE -->
-    <div class="et" id="majmunce" onclick="prikaziMejl()">@</div>
-    
-    <div class="yt-blok">
-        <a href="https://www.youtube.com/@%D0%9C.%D0%A2%D0%BE%D0%BA%D0%BE%D0%B2%D0%B8%D1%9B" target="_blank" class="mreza-ikona yt-boja">▶</a>
-        <a href="https://www.youtube.com/@marko32t/videos" target="_blank" class="mreza-ikona yt2-boja">▶</a>
+    <div class="donja-zona">
+        <div class="et-fiksni ikona-baza" onclick="prikaziMejl()">@</div>
+        <div style="display: flex; align-items: center; gap: 50px;">
+            <div class="yt-blok">
+                <a href="https://www.youtube.com/@%D0%9C.%D0%A2%D0%BE%D0%BA%D0%BE%D0%B2%D0%B8%D1%9B" target="_blank" class="mreza-ikona yt1 ikona-baza">▶</a>
+                <a href="https://www.youtube.com/@marko32t/videos" target="_blank" class="mreza-ikona yt2 ikona-baza">▶</a>
+            </div>
+            <a href="https://www.facebook.com/markotokovic" target="_blank" class="fb-fiksni ikona-baza">f</a>
+        </div>
     </div>
-
-    <a href="https://www.facebook.com/markotokovic" target="_blank" class="fb-fiksni">f</a>
 
     <script>
         const misliZaMaj = {
             "3.5.": "Кљун се заглавио у решетку канализационог одвода.<br>Уместо да смирено затвори кљун и извуче се,<br>он је све више гордо зевао и усисавао канализацију у себе.",
             "6.5.": "Чудио се зашто стално жури, као мећава —<br>док није схватио да га је ђаво узјахао па копитама удара о слабине,<br>а роговима га туче за врат.",
-            "8.5.": "Није исто Q10 и IQ10.",
+            "8.5.": "Није исто Q10 i IQ10.",
             "10.5.": "Гледају унакрсно, а нису разроки,<br>да би што више „похватали“.",
             "12.5.": "Један њаче, други гаче, трећи њишти, четврти пишти,<br>пети скаче… - јасно вам је да није реч о животињама.",
             "17.5.": "Знам човека који је имао захват на мозгу,<br>знам и другога који је имао интервенцију на задњици.<br>– Свакоме страда оно што највише користи.",
@@ -126,13 +130,11 @@
             "30.5.": "Имам гробно место, на прелепом месту, испод тује...<br>Нит нешто стичем, нит сам спреман за онамо...<br>Покој нам душама, ускоро, Боже здравља!",
             "31.5.": '<a href="https://youtu.be" target="_blank" style="color:#8b0000;">Тројице</a>'
         };
-
         function azurirajVreme() {
             const d = new Date();
             document.getElementById('sat-prikaz').innerText = d.toLocaleTimeString('sr-RS');
         }
         setInterval(azurirajVreme, 1000);
-
         function kucajTekst(e, t) {
             let i = 0; e.innerHTML = "";
             let interval = setInterval(() => {
@@ -141,19 +143,16 @@
                 if (i >= t.length) clearInterval(interval);
             }, 85);
         }
-
         function postaviSve() {
-            const d = new Date();
+            const d = new Date(); const dan = d.getDate(), mesec = d.getMonth() + 1;
             document.getElementById('datum-prikaz').innerText = d.toLocaleDateString('sr-RS') + ".";
-            const kljuc = d.getDate() + "." + (d.getMonth() + 1) + ".";
+            const kljuc = dan + "." + mesec + ".";
             const poruka = misliZaMaj[kljuc] || "Бог постоји за оне који верују,<br>а не постоји за оне који не верују...";
             kucajTekst(document.getElementById('tekst-misli'), poruka);
             azurirajVreme();
         }
-
-        function prikaziMejl() { document.getElementById('mejl-prozor').style.display='block'; document.getElementById('majmunce').style.visibility='hidden'; }
-        function zatvoriMejl() { document.getElementById('mejl-prozor').style.display='none'; document.getElementById('majmunce').style.visibility='visible'; }
-        
+        function prikaziMejl() { document.getElementById('mejl-prozor').style.display='block'; }
+        function zatvoriMejl() { document.getElementById('mejl-prozor').style.display='none'; }
         const k = document.getElementById('zvezde');
         for(let i=0; i<25; i++) {
             let z = document.createElement('div'); z.className = 'zvezda';
