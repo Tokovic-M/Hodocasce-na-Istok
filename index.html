@@ -5,7 +5,7 @@
     <title>М. Токовић - Ходочашће на Исток</title>
     <style>
         body, html { margin: 0; padding: 0; min-height: 100vh; width: 100%; overflow-x: hidden; font-family: 'Times New Roman', serif; background-color: #1a1a1a; }
-        body { background-image: url('p.jpg'); background-size: cover; background-position: center; background-attachment: fixed; }
+        body { background-size: cover; background-position: center; background-attachment: fixed; background-color: #1a1a1a; }
         .mrak { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.4); z-index: 1; pointer-events: none; }
 
         /* KURZOR RUKA */
@@ -145,7 +145,7 @@
         function idi(n) {
             const l = [
                 "",
-                "https://www.ohrid-prolog.com/?lang=sr",
+                "https://www.pravoslavnikalendar.rs/",
                 "https://saint.gr/",
                 "https://days.pravoslavie.ru/",
                 "mailto:topaz032@gmail.com",
@@ -180,21 +180,36 @@
         function listaj() { if(!f.length) return; f[cur].classList.remove('aktivna'); f[cur].classList.add('odlece'); cur=(cur+1)%f.length; setTimeout(()=>{f[cur].classList.remove('odlece');f[cur].classList.add('aktivna');},50); }
         setInterval(listaj, 3000);
 
-        function postaviSve() {
+                function postaviSve() {
             const d = new Date();
-            const m = d.getMonth() + 1; const dan = d.getDate();
+            const m = d.getMonth() + 1; 
+            const dan = d.getDate();
+
+            // 1. AUTOMATSKA POZADINA (m1.jpg, m2.jpg...)
+            document.body.style.backgroundImage = "url('m" + m + ".jpg')";
+
+            // 2. PRIKAZ DATUMA
             document.getElementById('datum-prikaz').innerText = d.toLocaleDateString('sr-RS');
             
+            // 3. SPECIJALNI REŽIM ZA 7.10. (VIDEO)
             const je710 = (m == 10 && dan == 7);
             document.getElementById('video-container').style.display = je710 ? "block" : "none";
             document.getElementById('glavna-sekcija').style.display = je710 ? "none" : "block";
             document.getElementById('donja-sekcija').style.display = je710 ? "none" : "flex";
 
+            // 4. TEKST NA PERGAMENTU
             const tekst = (misli2026[m] && misli2026[m][dan]) || "Људско битисање се протеже<br>од варања мозга до преварености ума.";
             kucajTekst(document.getElementById('tekst-misli'), tekst);
         }
-        setInterval(() => { document.getElementById('sat-prikaz').innerText = new Date().toLocaleTimeString('sr-RS'); }, 1000);
+
+        // OSVEŽAVANJE SATA SVAKE SEKUNDE
+        setInterval(() => { 
+            document.getElementById('sat-prikaz').innerText = new Date().toLocaleTimeString('sr-RS'); 
+        }, 1000);
+
+        // POKRETANJE SVEGA PRI UČITAVANJU
         postaviSve();
     </script>
 </body>
 </html>
+
